@@ -18,18 +18,18 @@ import javax.persistence.Query;
  * @param <T>
  * @param <V>
  */
-public class GenericDao<T, V> {
+public abstract class GenericDao<T, V> {
 
 	private EntityManagerFactory emf;
 
-	private EntityManager em;
+	protected EntityManager em;
 
-	private Class<T> clazz;
+	private Class<T> classe;
 
-	private String nameClass;
+	private String nomeClasse;
 
-	public GenericDao(Class<T> clazz) {
-		this.obterInformacoesClasse(clazz);
+	protected GenericDao(Class<T> classe) {
+		this.obterInformacoesClasse(classe);
 		this.criarConexao();
 	}
 
@@ -42,12 +42,12 @@ public class GenericDao<T, V> {
 
 	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
-		Query query = em.createQuery("SELECT e FROM " + this.nameClass + " e");
+		Query query = em.createQuery("SELECT e FROM " + this.nomeClasse + " e");
 		return query.getResultList();
 	}
 
 	public T findById(V id) {
-		return em.find(this.clazz, id);
+		return em.find(this.classe, id);
 	}
 
 	public void delete(T entity) {
@@ -56,9 +56,9 @@ public class GenericDao<T, V> {
 		em.getTransaction().commit();
 	}
 
-	private void obterInformacoesClasse(Class<T> clazz) {
-		this.clazz = clazz;
-		this.nameClass = this.clazz.getSimpleName();
+	private void obterInformacoesClasse(Class<T> classe) {
+		this.classe = classe;
+		this.nomeClasse = this.classe.getSimpleName();
 	}
 
 	private void criarConexao() {

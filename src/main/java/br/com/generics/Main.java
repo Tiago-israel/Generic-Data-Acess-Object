@@ -5,9 +5,8 @@
  */
 package br.com.generics;
 
-import java.util.List;
-
-import br.com.generics.dao.GenericDao;
+import br.com.generics.dao.CarroDao;
+import br.com.generics.dao.PessoaDao;
 import br.com.generics.model.Carro;
 import br.com.generics.model.Pessoa;
 
@@ -17,30 +16,23 @@ import br.com.generics.model.Pessoa;
  */
 public class Main {
 
-	public static void main(String[] args) {
+	public static Pessoa criarInstanciaPessoa() {
 		Pessoa pessoa = new Pessoa();
-		pessoa.setNome("Joana");
-		pessoa.setCpf("123456");
-		pessoa.setEmail("joana@gmail.com");
-		GenericDao<Pessoa, Integer> gd = new GenericDao<>(Pessoa.class);
-		
-		
-		GenericDao<Carro, Integer>carroDao = new GenericDao<>(Carro.class);
-		Carro carro = new Carro();
-		carro.setCor("vermelho");
-		carro.setMarca("fiat");
-		carroDao.save(carro);
-		
-		Pessoa pessoaPesquisada = gd.findById(12);
-		if(pessoaPesquisada != null) {
-			pessoaPesquisada.setNome("et bilu");
-			gd.save(pessoaPesquisada);
-		}
+		pessoa.setNome("Tiago Israel");
+		pessoa.setCpf("123");
+		pessoa.setEmail("tiago@gmail.com");
+		return pessoa;
+	}
 
-		System.out.println(gd.save(pessoa).getNome() + "Hello World!");
-		List<Pessoa> pessoas = gd.findAll();
-		pessoas.forEach(p -> {
-			System.out.println(p.getNome());
-		});
+	public static Carro CriarInstanciaCarro() {
+		Carro carro = new Carro();
+		carro.setCor("verde");
+		carro.setMarca("Ford");
+		return carro;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(PessoaDao.getInstance().save(criarInstanciaPessoa()));
+		System.out.println(CarroDao.getInstance().save(CriarInstanciaCarro()));
 	}
 }
