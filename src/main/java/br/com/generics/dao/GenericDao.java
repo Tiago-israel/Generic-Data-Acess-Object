@@ -49,6 +49,11 @@ public abstract class GenericDao<T, V> {
 	public T findById(V id) {
 		return em.find(this.classe, id);
 	}
+	
+	public long count() {
+		Query query = em.createQuery("SELECT COUNT(e) FROM "+this.nomeClasse+" e");
+		return (long)query.getSingleResult();
+	}
 
 	public void delete(T entity) {
 		em.getTransaction().begin();

@@ -5,10 +5,8 @@
  */
 package br.com.generics;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import br.com.generics.dao.CarroDao;
 import br.com.generics.dao.PessoaDao;
 import br.com.generics.model.Carro;
 import br.com.generics.model.Pessoa;
@@ -28,16 +26,21 @@ public class Main {
 	}
 
 	public static Carro CriarInstanciaCarro() {
-		Carro carro = new Carro();	
+		Carro carro = new Carro();
 		carro.setCor("verde");
 		carro.setMarca("Ford");
 		return carro;
 	}
 
 	public static void main(String[] args) {
-		List<Integer>aux = new ArrayList<>();
-		List<?>lista = aux;
-		System.out.println(PessoaDao.getInstance().save(criarInstanciaPessoa()));
-		System.out.println(CarroDao.getInstance().save(CriarInstanciaCarro()));
+		// List<Integer>aux = new ArrayList<>();
+		// List<?>lista = aux;
+		// System.out.println(PessoaDao.getInstance().save(criarInstanciaPessoa()));
+		// System.out.println(CarroDao.getInstance().save(CriarInstanciaCarro()));
+		System.out.println(PessoaDao.getInstance().count());
+		List<Pessoa>pessoas = PessoaDao.getInstance().buscarPorProfissao("programador sr");
+		pessoas.forEach(pessoa -> {
+			System.out.println(pessoa);
+		});
 	}
 }

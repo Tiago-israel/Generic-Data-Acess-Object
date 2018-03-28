@@ -30,6 +30,8 @@ public class Pessoa implements Serializable {
 	private String cpf;
 	@Column(length = 45)
 	private String email;
+	@Column(length = 45)
+	private String profissao;
 
 	public Pessoa() {
 	}
@@ -70,9 +72,17 @@ public class Pessoa implements Serializable {
 		this.email = email;
 	}
 
+	public String getProfissao() {
+		return profissao;
+	}
+
+	public void setProfissao(String profissao) {
+		this.profissao = profissao;
+	}
+
 	@Override
 	public String toString() {
-		return "br.com.generics.model.Pessoa[ id=" + id + " ]";
+		return "[ id : " + this.id + "| nome: " + this.nome + "| profissão:" +this.profissao+ "| email:" + this.email + " ]";
 	}
 
 }
